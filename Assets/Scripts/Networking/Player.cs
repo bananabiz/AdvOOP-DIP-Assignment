@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace Networking
 {
-    public class Player : MonoBehaviour
+    public class Player : NetworkBehaviour 
     {
         public float movementSpeed = 10f;
         public float lookSpeed = 30f;
@@ -19,6 +20,20 @@ namespace Networking
         void Start()
         {
             rigid = GetComponent<Rigidbody>();
+
+            //get Audio Listener from Camera
+            AudioListener audioListener = GetComponentInChildren<AudioListener>();
+            //get Camera
+            cam = GetComponentInChildren<Camera>();
+            
+            //if the current instance is not the local player
+            if (!isLocalPlayer)
+            {
+                //disable everything
+                cam.enabled = false;
+                audioListener.enabled = false;
+            }
+            
         }
         
         public void Move(float h, float v)
