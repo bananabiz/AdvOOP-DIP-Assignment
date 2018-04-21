@@ -16,6 +16,14 @@ public class PlayerHealth : MonoBehaviour
 
     private bool isHurt = false;
 
+    void Awake()
+    {
+        hpBar = GameObject.Find("HP_Image").GetComponent<Image>();
+        redPanel = GameObject.Find("RedPanel");
+        losePanel = GameObject.Find("LosePanel");
+        hurtSound = GameObject.Find("HurtSound").GetComponent<AudioSource>();
+    }
+
     // Use this for initialization
     void Start ()
     {
